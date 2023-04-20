@@ -207,6 +207,10 @@
     bottom: initial;
   }
 
+  .pagination span {
+    width: 5rem;
+  }
+
   .slider {
     height: 65vh;
   }
