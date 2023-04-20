@@ -117,7 +117,7 @@
   transition-property: transform;
 }
 
-.slide .slide-up-delay-1 {
+.slide .slide-up-delay {
   transition-delay: 1s;
 }
 

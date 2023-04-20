@@ -11,18 +11,18 @@ const SLIDES = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideAnimation, setSlideAnimation] = useState(false);
+  const [slideUp, setSlideUp] = useState(false);
   const timeoutRef = useRef(null);
 
   const slideUpHandler = () => {
-    setSlideAnimation(false);
+    setSlideUp(false);
     setTimeout(() => {
-      setSlideAnimation(true);
+      setSlideUp(true);
     }, 100);
   };
 
   const goToSlide = (slideIndex) => {
-    setSlideAnimation(false);
+    setSlideUp(false);
     setCurrentSlide(slideIndex);
     slideUpHandler();
   };
@@ -83,15 +83,13 @@ export default function Home() {
               >
                 <h1>
                   <div className='overflow-hidden'>
-                    <span className={slideAnimation ? 'slide-up' : null}>
+                    <span className={slideUp ? 'slide-up' : null}>
                       {SLIDES[currentSlide].copyTop}
                     </span>
                   </div>
                   <div className='overflow-hidden'>
                     <span
-                      className={
-                        slideAnimation ? 'slide-up slide-up-delay-1' : null
-                      }
+                      className={slideUp ? 'slide-up slide-up-delay' : null}
                     >
                       {SLIDES[currentSlide].copyBottom}
                     </span>
