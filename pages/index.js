@@ -40,7 +40,7 @@ export default function Home() {
       setCurrentSlide(
         currentSlide === SLIDES.length - 1 ? 0 : currentSlide + 1
       );
-    }, 3000);
+    }, 4000);
 
     return () => {
       resetTimeout();

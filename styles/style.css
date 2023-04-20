@@ -12,6 +12,7 @@
 .header__wrap {
   z-index: 10;
   position: absolute;
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -100,7 +101,7 @@
 .slide .slide-up {
   transform: none;
   transition-delay: 0.5s;
-  transition-duration: 0.3s;
+  transition-duration: 1s;
   transition-property: transform;
 }
 
@@ -145,6 +146,7 @@
   height: 5.5rem;
   font-size: 1.8rem;
   color: var(--color-accent);
+  border-radius: 0;
   padding: 2rem 2.5rem;
   margin-bottom: 1.5rem;
 }
