@@ -1,29 +1,51 @@
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SLIDES = [
-  { copyUp: 'We are in business to', copyBottom: 'help you do business.' },
-  { copyUp: 'Human insight.', copyBottom: 'Advanced analytics.' },
-  { copyUp: 'Choose the card', copyBottom: 'that works for you.' },
-  { copyUp: 'You may qualify for', copyBottom: 'an upgrade.' },
-  { copyUp: 'Up to 4.70%', copyBottom: 'Annual Percentage Yield.' },
+  { copyTop: 'We are in business to', copyBottom: 'help you do business.' },
+  { copyTop: 'Human insight.', copyBottom: 'Advanced analytics.' },
+  { copyTop: 'Choose the card', copyBottom: 'that works for you.' },
+  { copyTop: 'You may qualify for', copyBottom: 'an upgrade.' },
+  { copyTop: 'Up to 4.70%', copyBottom: 'Annual Percentage Yield.' },
 ];
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slideUp, setSlideUp] = useState(false);
+  const timeoutRef = useRef(null);
 
-  const goToSlide = (slideIndex) => {
+  const slideUpHandler = () => {
     setSlideUp(false);
-    setCurrentSlide(slideIndex);
     setTimeout(() => {
       setSlideUp(true);
     }, 100);
   };
 
+  const goToSlide = (slideIndex) => {
+    setSlideUp(false);
+    setCurrentSlide(slideIndex);
+    slideUpHandler();
+  };
+
+  const resetTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
   useEffect(() => {
-    setSlideUp(true);
-  }, []);
+    slideUpHandler();
+    resetTimeout();
+    timeoutRef.current = setTimeout(() => {
+      setCurrentSlide(
+        currentSlide === SLIDES.length - 1 ? 0 : currentSlide + 1
+      );
+    }, 3000);
+
+    return () => {
+      resetTimeout();
+    };
+  }, [currentSlide]);
 
   return (
     <>
@@ -60,7 +82,7 @@ export default function Home() {
                 <h1>
                   <div className='overflow-hidden'>
                     <span className={slideUp ? 'slide-up' : null}>
-                      {SLIDES[currentSlide].copyUp}
+                      {SLIDES[currentSlide].copyTop}
                     </span>
                   </div>
                   <div className='overflow-hidden'>

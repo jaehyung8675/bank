@@ -75,6 +75,8 @@
   display: flex;
   align-items: flex-end;
   padding: 6rem 8rem;
+
+  transition: ease 1000ms;
 }
 
 .slide h1 {
@@ -98,7 +100,7 @@
 .slide .slide-up {
   transform: none;
   transition-delay: 0.5s;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
   transition-property: transform;
 }
 
