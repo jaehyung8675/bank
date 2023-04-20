@@ -11,18 +11,18 @@ const SLIDES = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [slideUp, setSlideUp] = useState(false);
+  const [slideAnimation, setSlideAnimation] = useState(false);
   const timeoutRef = useRef(null);
 
   const slideUpHandler = () => {
-    setSlideUp(false);
+    setSlideAnimation(false);
     setTimeout(() => {
-      setSlideUp(true);
+      setSlideAnimation(true);
     }, 100);
   };
 
   const goToSlide = (slideIndex) => {
-    setSlideUp(false);
+    setSlideAnimation(false);
     setCurrentSlide(slideIndex);
     slideUpHandler();
   };
@@ -40,7 +40,7 @@ export default function Home() {
       setCurrentSlide(
         currentSlide === SLIDES.length - 1 ? 0 : currentSlide + 1
       );
-    }, 4000);
+    }, 5000);
 
     return () => {
       resetTimeout();
@@ -64,11 +64,13 @@ export default function Home() {
               </a>
               <div className='pagination'>
                 {SLIDES.map((_, slideIndex) => (
-                  <span
+                  <button
                     key={slideIndex}
                     className={currentSlide === slideIndex ? 'active' : null}
                     onClick={() => goToSlide(slideIndex)}
-                  ></span>
+                  >
+                    <span></span>
+                  </button>
                 ))}
               </div>
             </div>
@@ -81,13 +83,15 @@ export default function Home() {
               >
                 <h1>
                   <div className='overflow-hidden'>
-                    <span className={slideUp ? 'slide-up' : null}>
+                    <span className={slideAnimation ? 'slide-up' : null}>
                       {SLIDES[currentSlide].copyTop}
                     </span>
                   </div>
                   <div className='overflow-hidden'>
                     <span
-                      className={slideUp ? 'slide-up slide-up-delay-1' : null}
+                      className={
+                        slideAnimation ? 'slide-up slide-up-delay-1' : null
+                      }
                     >
                       {SLIDES[currentSlide].copyBottom}
                     </span>
